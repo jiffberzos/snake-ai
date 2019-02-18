@@ -7,15 +7,18 @@ function setup(){
 	frameRate(5);
 	food = new Food();
 	food.newFood();
+	neuralnet = new NeuralNet();
+	neuralnet.defineModel();
 }
 
 function draw(){
 	background(0);
-	snake.update()
-	food.update()
-	snake.death()
-	snake.show()
-	food.show()
+	snake.updateSpeed();
+	snake.updatePosition();
+	food.update();
+	snake.death();
+	snake.show();
+	food.show();
 
 }
 

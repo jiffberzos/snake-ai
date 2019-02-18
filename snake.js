@@ -7,19 +7,33 @@ function Snake(){
 	this.length = 0;
 	this.tail = [];
 
-	this.update = function(){
+	this.updateSpeed = function(){
+		action = neuralnet.getAction();
+		if(action[0]===1&& snake.yspeed != 1){
+			this.direction(0,-1);
+		}
+		if(action[1]===1&& snake.yspeed != -1){
+			this.direction(0,1);	
+		}
+		if(action[2]===1&& snake.xspeed != 1){
+			this.direction(-1,0);
+		}
+		if(action[3]===1&& snake.xspeed != -1){
+			this.direction(1,0);
+		}	
+	}
+
+
+
+	this.updatePosition = function(){
 		if(this.length == this.tail.length){
 			for(var i = 0; i < this.length-1; i++){
-				console.log(i)
 				this.tail[i] = this.tail[i+1]
 			}	
 		}
-		console.log(this.length)
 		this.tail[this.length-1] = createVector(this.x,this.y)
 		this.x += this.xspeed*scl;
 		this.y += this.yspeed*scl;
-		//this.x = constrain(this.x, 0, width-scl)
-		//this.y = constrain(this.y, 0, height-scl)
 	}
 
 	this.direction = function(x,y){
@@ -31,7 +45,6 @@ function Snake(){
 		fill(255);
 		rect(this.x,this.y,scl,scl);
 		for(var i = 0; i < this.tail.length; i++){
-			console.log(i, this.tail)
 			rect(this.tail[i].x,this.tail[i].y,scl,scl);
 		}
 
